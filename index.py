@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-    
+import requests
 from src.logger import logger, loggerMapClicked
 from cv2 import cv2
 from os import listdir
@@ -10,6 +11,8 @@ import pyautogui
 import time
 import sys
 import yaml
+
+test = telegram_bot_sendtext("⚠️ ATENÇÃO! \n\n 🧩 RESOLVER NOVO CAPTCHA!")
 
 # Load config file.
 stream = open("config.yaml", 'r')
@@ -49,7 +52,12 @@ cat = """
 
 >>---> Some configs can be found in the config.yaml file."""
 
-
+def telegram_bot_sendtext(bot_message):
+    bot_token = '5152163912:AAEwhbkl0Z_28efbofNwog2ZsDhGNLVWp8o'
+    bot_chatID = '5315561375'
+    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
+    response = requests.get(send_text)
+    return response.json()
 
 
 
